@@ -1,14 +1,10 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Navigation from '@/components/Navigation'
-import { getPostBySlug, markdownToHtml, getAllPosts } from '@/lib/redis-posts'
+import { getPostBySlug, markdownToHtml } from '@/lib/redis-posts'
 
-export async function generateStaticParams() {
-  const posts = await getAllPosts()
-  return posts.map((post) => ({
-    slug: post.slug,
-  }))
-}
+// 强制动态渲染
+export const dynamic = 'force-dynamic'
 
 type Props = {
   params: Promise<{ slug: string }>
