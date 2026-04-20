@@ -1,0 +1,263 @@
+/**
+ * 字体系统
+ * 标题使用像素字体，正文使用现代字体
+ */
+
+/* ========================================
+   字体导入
+   ======================================== */
+
+/* 像素字体 - Press Start 2P (Google Fonts) - 仅支持英文 */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* 备选像素字体 - Silkscreen */
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
+/* 中文像素字体 - Ark Pixel Font (本地文件) */
+@font-face {
+  font-family: 'Ark Pixel';
+  src: url('ark-pixel-12px-proportional-zh_cn.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
+   标题样式 - 使用现代字体
+   ======================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font--sans);
+  font-weight: var(--font-weight--semibold);
+  line-height: var(--line-height--tight);
+  letter-spacing: var(--letter-spacing--normal);
+  color: var(--color-text);
+  margin-bottom: var(--space--4);
+}
+
+h1 {
+  font-size: var(--font-size--display-l);
+  margin-bottom: var(--space--6);
+}
+
+h2 {
+  font-size: var(--font-size--display-m);
+  margin-bottom: var(--space--5);
+}
+
+h3 {
+  font-size: var(--font-size--display-s);
+}
+
+h4 {
+  font-size: var(--font-size--display-xs);
+}
+
+h5 {
+  font-size: var(--font-size--paragraph-l);
+}
+
+h6 {
+  font-size: var(--font-size--paragraph-m);
+}
+
+/* ========================================
+   正文样式 - 现代字体
+   ======================================== */
+
+p {
+  font-family: var(--font--sans);
+  font-size: var(--font-size--paragraph-m);
+  line-height: var(--line-height--relaxed);
+  color: var(--color-text);
+  margin-bottom: var(--space--4);
+}
+
+/* 大段落 */
+.text--large {
+  font-size: var(--font-size--paragraph-l);
+  line-height: var(--line-height--relaxed);
+}
+
+/* 小段落 */
+.text--small {
+  font-size: var(--font-size--paragraph-s);
+}
+
+/* 次要文本 */
+.text--secondary {
+  color: var(--color-text-secondary);
+}
+
+/* 弱化文本 */
+.text--muted {
+  color: var(--color-text-muted);
+}
+
+/* ========================================
+   特殊文本样式
+   ======================================== */
+
+/* 引用块 */
+blockquote {
+  font-family: var(--font--serif);
+  font-size: var(--font-size--paragraph-l);
+  line-height: var(--line-height--relaxed);
+  color: var(--color-text-secondary);
+  border-left: var(--border-width--pixel) solid var(--color-accent);
+  padding-left: var(--space--6);
+  margin: var(--space--6) 0;
+  font-style: italic;
+}
+
+/* 代码 */
+code {
+  font-family: var(--font--mono);
+  font-size: 0.9em;
+  background-color: var(--color-background-secondary);
+  padding: var(--space--1) var(--space--2);
+  border-radius: var(--radius--pixel);
+  color: var(--color-text);
+}
+
+pre {
+  font-family: var(--font--mono);
+  font-size: var(--font-size--paragraph-s);
+  line-height: var(--line-height--relaxed);
+  background-color: var(--color-background-secondary);
+  padding: var(--space--5);
+  border-radius: var(--radius--small);
+  overflow-x: auto;
+  margin: var(--space--6) 0;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* ========================================
+   列表
+   ======================================== */
+
+ul, ol {
+  font-family: var(--font--sans);
+  font-size: var(--font-size--paragraph-m);
+  line-height: var(--line-height--relaxed);
+  margin-bottom: var(--space--4);
+  padding-left: var(--space--6);
+}
+
+li {
+  margin-bottom: var(--space--2);
+}
+
+/* ========================================
+   辅助类 - 字体变体
+   ======================================== */
+
+/* 像素字体类（用于特殊元素）*/
+.font--pixel {
+  font-family: var(--font--pixel);
+  letter-spacing: var(--letter-spacing--pixel);
+  text-transform: uppercase;
+}
+
+/* 无衬线字体 */
+.font--sans {
+  font-family: var(--font--sans);
+}
+
+/* 衬线字体 */
+.font--serif {
+  font-family: var(--font--serif);
+}
+
+/* 等宽字体 */
+.font--mono {
+  font-family: var(--font--mono);
+}
+
+/* ========================================
+   文本对齐
+   ======================================== */
+
+.text--left {
+  text-align: left;
+}
+
+.text--center {
+  text-align: center;
+}
+
+.text--right {
+  text-align: right;
+}
+
+/* ========================================
+   字重
+   ======================================== */
+
+.font-weight--regular {
+  font-weight: var(--font-weight--regular);
+}
+
+.font-weight--medium {
+  font-weight: var(--font-weight--medium);
+}
+
+.font-weight--semibold {
+  font-weight: var(--font-weight--semibold);
+}
+
+.font-weight--bold {
+  font-weight: var(--font-weight--bold);
+}
+
+/* ========================================
+   强调和标记
+   ======================================== */
+
+strong, b {
+  font-weight: var(--font-weight--semibold);
+}
+
+em, i {
+  font-style: italic;
+}
+
+mark {
+  background-color: rgba(217, 119, 87, 0.2);
+  color: var(--color-text);
+  padding: var(--space--1) var(--space--2);
+  border-radius: var(--radius--pixel);
+}
+
+/* ========================================
+   链接样式
+   ======================================== */
+
+a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: all var(--transition--fast);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+  text-decoration-thickness: 2px;
+}
+
+/* 像素风链接（无下划线，带边框）*/
+a.link--pixel {
+  text-decoration: none;
+  border-bottom: var(--border-width--pixel) solid currentColor;
+  padding-bottom: 2px;
+}
+
+a.link--pixel:hover {
+  border-bottom-width: calc(var(--border-width--pixel) + 1px);
+}

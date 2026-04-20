@@ -1,0 +1,117 @@
+/**
+ * Anthropic 官网 CSS 变量参考
+ * 从 anthropic.com 提取的设计系统变量
+ * 用于参考和学习优雅的现代设计风格
+ */
+
+:root {
+  /* 导航栏 */
+  --nav--height: 4.25rem;
+  --nav--banner-height: 2.75rem;
+  --nav--height-total: var(--nav--height);
+  --nav--icon-thickness: var(--border-width--main);
+  --nav--hamburger-thickness: var(--nav--icon-thickness);
+  --nav--hamburger-gap: 0.4rem;
+  --nav--hamburger-rotate: 45;
+  --nav--menu-open-duration: 400ms;
+  --nav--menu-close-duration: 400ms;
+  --nav--dropdown-duration: 200ms;
+  --nav--dropdown-open-duration: 200ms;
+  --nav--dropdown-delay: 0ms;
+
+  /* 响应式尺寸 - clamp() */
+  --site--margin: clamp(2rem, 1.0816326530612246rem + 3.9183673469387754vw, 5rem);
+  --size--2rem: clamp(1.75rem, 1.6734693877551021rem + 0.326530612244898vw, 2rem);
+  --size--2-5rem: clamp(2rem, 1.846938775510204rem + 0.653061224489796vw, 2.5rem);
+  --size--3rem: clamp(2.25rem, 2.020408163265306rem + 0.9795918367346939vw, 3rem);
+  --size--4rem: clamp(2.5rem, 2.0408163265306123rem + 1.9591836734693877vw, 4rem);
+  --size--5rem: clamp(3rem, 2.3877551020408165rem + 2.612244897959184vw, 5rem);
+  --size--6rem: clamp(3.5rem, 2.7346938775510203rem + 3.2653061224489797vw, 6rem);
+  --size--7rem: clamp(4rem, 3.0816326530612246rem + 3.9183673469387754vw, 7rem);
+  --size--8rem: clamp(4.5rem, 3.4285714285714284rem + 4.571428571428571vw, 8rem);
+
+  /* 字体大小 - 响应式 */
+  --font-size--display-xs: clamp(1.125rem, 1.086734693877551rem + 0.163265306122449vw, 1.25rem);
+  --font-size--display-s: clamp(1.25rem, 1.1734693877551021rem + 0.326530612244898vw, 1.5rem);
+  --font-size--display-m: clamp(1.75rem, 1.6734693877551021rem + 0.326530612244898vw, 2rem);
+  --font-size--display-l: clamp(2rem, 1.6938775510204083rem + 1.306122448979592vw, 3rem);
+  --font-size--display-xl: clamp(2.5rem, 2.0408163265306123rem + 1.9591836734693877vw, 4rem);
+  --font-size--display-xxl: clamp(3rem, 2.3877551020408165rem + 2.612244897959184vw, 5rem);
+  --font-size--paragraph-s: clamp(1rem, 0.9617346938775511rem + 0.163265306122449vw, 1.125rem);
+  --font-size--paragraph-m: clamp(1.125rem, 1.086734693877551rem + 0.163265306122449vw, 1.25rem);
+  --font-size--paragraph-l: clamp(1.375rem, 1.336734693877551rem + 0.163265306122449vw, 1.5rem);
+
+  /* 布局系统 - 12列网格 */
+  --site--max-width: min(var(--site--width), 100vw);
+  --container--main: calc(var(--site--max-width) - var(--site--margin) * 2);
+  --container--full: calc(100% - 4rem);
+  --container--small: calc(var(--column-width--plus-gutter) * (var(--site--column-count) - 4) - var(--site--gutter));
+  --site--gutter-total: calc(var(--site--gutter) * (var(--site--column-count) - 1));
+  --column-width--1: calc((var(--container--main) - var(--site--gutter-total)) / var(--site--column-count));
+  --column-width--plus-gutter: calc(var(--column-width--1) + var(--site--gutter));
+
+  /* 颜色主题 */
+  --color-theme--background: var(--swatch--ivory-light);
+  --color-theme--text: var(--swatch--slate-dark);
+  --color-theme--background-secondary: var(--swatch--ivory-medium);
+  --color-theme--border: var(--swatch--slate-faded-10);
+  --color-theme--link--text-hover: var(--swatch--slate-light);
+
+  /* 间距系统 */
+  --spacing--space--1: var(--size--0-25rem);
+  --spacing--space--2: var(--size--0-5rem);
+  --spacing--space--3: var(--size--0-75rem);
+  --spacing--space--4: var(--size--1rem);
+  --spacing--space--5: var(--size--1-5rem);
+  --spacing--space--6: var(--size--2rem);
+  --spacing--space--7: var(--size--2-5rem);
+  --spacing--space--8: var(--size--3rem);
+  --spacing--space--9: var(--size--4rem);
+
+  /* 圆角 */
+  --radius--small: var(--size--0-25rem);
+  --radius--main: var(--size--0-5rem);
+  --radius--large: var(--size--1rem);
+  --radius--round: 100vw;
+
+  /* 字体家族 */
+  --typography--font--display-sans: "Anthropic Sans", Arial, sans-serif;
+  --typography--font--display-serif: "Anthropic Serif", Georgia, sans-serif;
+  --typography--font--paragraph-text: "Anthropic Sans", Arial, sans-serif;
+
+  /* 字重 */
+  --typography--font--paragraph-regular: 400;
+  --typography--font--paragraph-medium: 500;
+  --typography--font--display-sans-medium: 500;
+  --typography--font--display-sans-semibold: 600;
+  --typography--font--display-serif-semibold: 600;
+  --typography--font--display-sans-bold: 700;
+
+  /* 行高 */
+  --typography--line-height--1-4: 1.4;
+
+  /* 字间距 */
+  --typography--letter-spacing--0em: 0em;
+
+  /* 边框 */
+  --border-width--main: 0.0625rem;
+
+  /* 色板 */
+  --swatch--clay: #d97757;
+  --swatch--slate-faded-10: rgba(45, 45, 45, 0.1);
+  --swatch--cloud-medium: #b8b8b8;
+
+  /* 选择文本样式 */
+  /* ::selection { background: rgba(204, 120, 92, 0.5); } */
+}
+
+/**
+ * 设计原则总结：
+ *
+ * 1. 响应式尺寸：使用 clamp() 实现流畅的响应式设计
+ * 2. 柔和的颜色：米白色背景 + 半透明边框和阴影
+ * 3. 12列网格系统：灵活的布局结构
+ * 4. 语义化变量：清晰的命名约定
+ * 5. 平滑过渡：使用 cubic-bezier 缓动函数
+ * 6. 微妙的交互：悬停时的轻微变化
+ */

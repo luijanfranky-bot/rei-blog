@@ -1,0 +1,189 @@
+/**
+ * 布局系统
+ * 基于 12 列网格的响应式布局
+ */
+
+/* ========================================
+   网格系统
+   ======================================== */
+
+.grid {
+  display: grid;
+  gap: var(--site--gutter);
+}
+
+/* 12 列主网格 */
+.grid--12 {
+  grid-template-columns: repeat(12, 1fr);
+}
+
+/* 常用网格布局 */
+.grid--1 { grid-template-columns: repeat(1, 1fr); }
+.grid--2 { grid-template-columns: repeat(2, 1fr); }
+.grid--3 { grid-template-columns: repeat(3, 1fr); }
+.grid--4 { grid-template-columns: repeat(4, 1fr); }
+.grid--6 { grid-template-columns: repeat(6, 1fr); }
+
+/* 响应式网格 */
+@media (max-width: 768px) {
+  .grid--12,
+  .grid--6,
+  .grid--4,
+  .grid--3 {
+    grid-template-columns: 1fr;
+  }
+
+  .grid--2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 网格跨度 */
+.col-span--1 { grid-column: span 1; }
+.col-span--2 { grid-column: span 2; }
+.col-span--3 { grid-column: span 3; }
+.col-span--4 { grid-column: span 4; }
+.col-span--5 { grid-column: span 5; }
+.col-span--6 { grid-column: span 6; }
+.col-span--7 { grid-column: span 7; }
+.col-span--8 { grid-column: span 8; }
+.col-span--9 { grid-column: span 9; }
+.col-span--10 { grid-column: span 10; }
+.col-span--11 { grid-column: span 11; }
+.col-span--12 { grid-column: span 12; }
+
+/* ========================================
+   Flexbox 布局
+   ======================================== */
+
+.flex {
+  display: flex;
+}
+
+.flex--column {
+  flex-direction: column;
+}
+
+.flex--row {
+  flex-direction: row;
+}
+
+.flex--wrap {
+  flex-wrap: wrap;
+}
+
+/* 对齐 */
+.justify--start { justify-content: flex-start; }
+.justify--center { justify-content: center; }
+.justify--end { justify-content: flex-end; }
+.justify--between { justify-content: space-between; }
+.justify--around { justify-content: space-around; }
+
+.items--start { align-items: flex-start; }
+.items--center { align-items: center; }
+.items--end { align-items: flex-end; }
+.items--stretch { align-items: stretch; }
+
+/* Gap */
+.gap--1 { gap: var(--space--1); }
+.gap--2 { gap: var(--space--2); }
+.gap--3 { gap: var(--space--3); }
+.gap--4 { gap: var(--space--4); }
+.gap--5 { gap: var(--space--5); }
+.gap--6 { gap: var(--space--6); }
+.gap--8 { gap: var(--space--8); }
+
+/* ========================================
+   间距工具类
+   ======================================== */
+
+/* Margin */
+.m--0 { margin: 0; }
+.m--1 { margin: var(--space--1); }
+.m--2 { margin: var(--space--2); }
+.m--3 { margin: var(--space--3); }
+.m--4 { margin: var(--space--4); }
+.m--5 { margin: var(--space--5); }
+.m--6 { margin: var(--space--6); }
+.m--8 { margin: var(--space--8); }
+
+.mt--4 { margin-top: var(--space--4); }
+.mt--6 { margin-top: var(--space--6); }
+.mt--8 { margin-top: var(--space--8); }
+
+.mb--4 { margin-bottom: var(--space--4); }
+.mb--6 { margin-bottom: var(--space--6); }
+.mb--8 { margin-bottom: var(--space--8); }
+
+.my--4 { margin-top: var(--space--4); margin-bottom: var(--space--4); }
+.my--6 { margin-top: var(--space--6); margin-bottom: var(--space--6); }
+.my--8 { margin-top: var(--space--8); margin-bottom: var(--space--8); }
+
+/* Padding */
+.p--0 { padding: 0; }
+.p--2 { padding: var(--space--2); }
+.p--4 { padding: var(--space--4); }
+.p--6 { padding: var(--space--6); }
+.p--8 { padding: var(--space--8); }
+
+.px--4 { padding-left: var(--space--4); padding-right: var(--space--4); }
+.px--6 { padding-left: var(--space--6); padding-right: var(--space--6); }
+
+.py--4 { padding-top: var(--space--4); padding-bottom: var(--space--4); }
+.py--6 { padding-top: var(--space--6); padding-bottom: var(--space--6); }
+.py--8 { padding-top: var(--space--8); padding-bottom: var(--space--8); }
+
+/* ========================================
+   Section 布局
+   ======================================== */
+
+.section {
+  padding-top: var(--space--9);
+  padding-bottom: var(--space--9);
+}
+
+.section--small {
+  padding-top: var(--space--6);
+  padding-bottom: var(--space--6);
+}
+
+.section--large {
+  padding-top: clamp(6rem, 4.16vw + 7.84vw, 12rem);
+  padding-bottom: clamp(6rem, 4.16vw + 7.84vw, 12rem);
+}
+
+/* ========================================
+   响应式显示
+   ======================================== */
+
+@media (max-width: 768px) {
+  .hide--mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .hide--desktop {
+    display: none;
+  }
+}
+
+/* ========================================
+   宽度限制
+   ======================================== */
+
+.max-w--small {
+  max-width: var(--container--small);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.max-w--main {
+  max-width: var(--container--main);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.w--full {
+  width: 100%;
+}
