@@ -1,10 +1,10 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Navigation from '@/components/Navigation'
-import { getPostBySlug, markdownToHtml, getAllPosts } from '@/lib/posts'
+import { getPostBySlug, markdownToHtml, getAllPosts } from '@/lib/redis-posts'
 
 export async function generateStaticParams() {
-  const posts = getAllPosts()
+  const posts = await getAllPosts()
   return posts.map((post) => ({
     slug: post.slug,
   }))
@@ -16,7 +16,7 @@ type Props = {
 
 export default async function PostPage({ params }: Props) {
   const { slug } = await params
-  const post = getPostBySlug(slug)
+  const post = await getPostBySlug(slug)
 
   if (!post) {
     notFound()

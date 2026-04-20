@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
-import { getAllPosts } from '@/lib/posts'
+import { getAllPosts } from '@/lib/redis-posts'
 
 export async function GET() {
-  const posts = getAllPosts()
+  const posts = await getAllPosts()
   return NextResponse.json(posts)
 }

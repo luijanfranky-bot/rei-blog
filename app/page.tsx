@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import Navigation from '@/components/Navigation'
-import { getAllPosts } from '@/lib/posts'
+import { getAllPosts } from '@/lib/redis-posts'
 
-export default function Home() {
-  const posts = getAllPosts()
+export default async function Home() {
+  const posts = await getAllPosts()
 
   return (
     <>

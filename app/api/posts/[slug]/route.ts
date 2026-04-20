@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server'
-import { getPostBySlug } from '@/lib/posts'
+import { getPostBySlug, updatePost } from '@/lib/redis-posts'
 
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params
-  const post = getPostBySlug(slug)
+  const post = await getPostBySlug(slug)
 
   if (!post) {
     return NextResponse.json(
@@ -25,30 +25,20 @@ export async function PUT(
   try {
     const { slug } = await params
     const { title, tags, summary, content, cover } = await request.json()
-    const fs = require('fs')
-    const path = require('path')
 
     // 获取当前日期
     const date = new Date().toISOString().split('T')[0]
 
-    // 生成 Markdown 文件内容
-    const markdown = `---
-title: "${title}"
-date: "${date}"
-tags: [${tags.map((t: string) => `"${t}"`).join(', ')}]
-summary: "${summary}"
-cover: "${cover}"
-readTime: "5 分钟阅读"
----
-
-${content}
-`
-
-    // 更新文件
-    const postsDir = path.join(process.cwd(), 'posts')
-    const filePath = path.join(postsDir, `${slug}.md`)
-
-    fs.writeFileSync(filePath, markdown, 'utf8')
+    // 更新文章
+    await updatePost(slug, {
+      title,
+      date,
+      tags,
+      summary,
+      content,
+      cover: cover || '',
+      readTime: '5 分钟阅读',
+    })
 
     return NextResponse.json({ success: true })
   } catch (error) {
