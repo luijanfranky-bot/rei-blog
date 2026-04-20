@@ -1,10 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
-export default function EditPost({ params }: { params: { slug: string } }) {
+export default function EditPost({ params }: { params: Promise<{ slug: string }> }) {
+  const [slug, setSlug] = useState<string>('')
   const [title, setTitle] = useState('')
   const [tags, setTags] = useState('')
   const [summary, setSummary] = useState('')
@@ -15,30 +16,35 @@ export default function EditPost({ params }: { params: { slug: string } }) {
   const router = useRouter()
 
   useEffect(() => {
-    // 检查登录状态
-    const isAdmin = localStorage.getItem('isAdmin')
-    if (!isAdmin) {
-      router.push('/admin/login')
-      return
-    }
+    // 解包 params Promise
+    params.then(({ slug: resolvedSlug }) => {
+      setSlug(resolvedSlug)
 
-    // 加载文章内容
-    fetch(`/api/posts/${params.slug}`)
-      .then(res => res.json())
-      .then(data => {
-        setTitle(data.title)
-        setTags(data.tags.join(', '))
-        setSummary(data.summary)
-        setContent(data.content)
-        setCover(data.cover || '')
-        setLoading(false)
-      })
-      .catch(error => {
-        console.error('Error loading post:', error)
-        alert('加载文章失败')
-        setLoading(false)
-      })
-  }, [router, params.slug])
+      // 检查登录状态
+      const isAdmin = localStorage.getItem('isAdmin')
+      if (!isAdmin) {
+        router.push('/admin/login')
+        return
+      }
+
+      // 加载文章内容
+      fetch(`/api/posts/${resolvedSlug}`)
+        .then(res => res.json())
+        .then(data => {
+          setTitle(data.title)
+          setTags(data.tags.join(', '))
+          setSummary(data.summary)
+          setContent(data.content)
+          setCover(data.cover || '')
+          setLoading(false)
+        })
+        .catch(error => {
+          console.error('Error loading post:', error)
+          alert('加载文章失败')
+          setLoading(false)
+        })
+    })
+  }, [router, params])
 
   const handleSave = async () => {
     if (!title || !content) {
@@ -49,7 +55,7 @@ export default function EditPost({ params }: { params: { slug: string } }) {
     setSaving(true)
 
     try {
-      const response = await fetch(`/api/posts/${params.slug}`, {
+      const response = await fetch(`/api/posts/${slug}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -3,9 +3,10 @@ import { getPostBySlug } from '@/lib/posts'
 
 export async function GET(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
-  const post = getPostBySlug(params.slug)
+  const { slug } = await params
+  const post = getPostBySlug(slug)
 
   if (!post) {
     return NextResponse.json(
@@ -19,9 +20,10 @@ export async function GET(
 
 export async function PUT(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
+    const { slug } = await params
     const { title, tags, summary, content, cover } = await request.json()
     const fs = require('fs')
     const path = require('path')
@@ -44,7 +46,7 @@ ${content}
 
     // 更新文件
     const postsDir = path.join(process.cwd(), 'posts')
-    const filePath = path.join(postsDir, `${params.slug}.md`)
+    const filePath = path.join(postsDir, `${slug}.md`)
 
     fs.writeFileSync(filePath, markdown, 'utf8')
 
