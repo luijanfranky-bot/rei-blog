@@ -79,7 +79,7 @@ export default function Navigation() {
         }}>
           <li>
             <Link href="/" style={{
-              fontFamily: "'Press Start 2P', monospace",
+              fontFamily: "'Ark Pixel', monospace",
               fontSize: '16px',
               fontWeight: 700,
               letterSpacing: '0.1em',
@@ -92,7 +92,7 @@ export default function Navigation() {
           </li>
           <li>
             <Link href="#" style={{
-              fontFamily: "'Press Start 2P', monospace",
+              fontFamily: "'Ark Pixel', monospace",
               fontSize: '16px',
               fontWeight: 700,
               letterSpacing: '0.1em',
@@ -105,7 +105,7 @@ export default function Navigation() {
           </li>
           <li>
             <Link href="#" style={{
-              fontFamily: "'Press Start 2P', monospace",
+              fontFamily: "'Ark Pixel', monospace",
               fontSize: '16px',
               fontWeight: 700,
               letterSpacing: '0.1em',
@@ -118,7 +118,7 @@ export default function Navigation() {
           </li>
           <li>
             <Link href="#" style={{
-              fontFamily: "'Press Start 2P', monospace",
+              fontFamily: "'Ark Pixel', monospace",
               fontSize: '16px',
               fontWeight: 700,
               letterSpacing: '0.1em',
@@ -132,7 +132,7 @@ export default function Navigation() {
           {isLoggedIn && (
             <li>
               <Link href="/admin/posts" style={{
-                fontFamily: "'Press Start 2P', monospace",
+                fontFamily: "'Ark Pixel', monospace",
                 fontSize: '16px',
                 fontWeight: 700,
                 letterSpacing: '0.1em',
@@ -149,7 +149,7 @@ export default function Navigation() {
               <button
                 onClick={handleLogout}
                 style={{
-                  fontFamily: "'Press Start 2P', monospace",
+                  fontFamily: "'Ark Pixel', monospace",
                   fontSize: '16px',
                   fontWeight: 700,
                   letterSpacing: '0.1em',
@@ -167,7 +167,7 @@ export default function Navigation() {
               </button>
             ) : (
               <Link href="/admin/login" style={{
-                fontFamily: "'Press Start 2P', monospace",
+                fontFamily: "'Ark Pixel', monospace",
                 fontSize: '16px',
                 fontWeight: 700,
                 letterSpacing: '0.1em',
