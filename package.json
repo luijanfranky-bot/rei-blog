@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@upstash/redis": "^1.37.0",
+    "@vercel/blob": "^2.3.3",
     "gray-matter": "^4.0.3",
+    "highlight.js": "^11.11.1",
     "marked": "^15.0.6",
     "next": "^15.1.6",
     "react": "^19.0.0",

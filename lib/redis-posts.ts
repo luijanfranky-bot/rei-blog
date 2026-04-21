@@ -12,7 +12,12 @@ export interface Post {
   cover: string
   readTime: string
   content: string
+  createdAt: string  // ISO 8601 格式，文章创建时间，不可变
+  updatedAt: string  // ISO 8601 格式，最后编辑时间
 }
+
+// 分页配置
+export const POSTS_PER_PAGE = 5
 
 // 获取所有文章
 export async function getAllPosts(): Promise<Post[]> {
@@ -32,13 +37,47 @@ export async function getAllPosts(): Promise<Post[]> {
       })
     )
 
-    // 过滤掉 null 值并按日期排序
+    // 过滤掉 null 值并按创建时间降序排序（最新的在前）
     return posts
       .filter((post): post is Post => post !== null)
-      .sort((a, b) => (a.date < b.date ? 1 : -1))
+      .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1))
   } catch (error) {
     console.error('Error getting all posts:', error)
     return []
+  }
+}
+
+// 获取分页文章
+export async function getPaginatedPosts(page: number = 1): Promise<{
+  posts: Post[]
+  totalPages: number
+  currentPage: number
+  totalPosts: number
+}> {
+  try {
+    const allPosts = await getAllPosts()
+    const totalPosts = allPosts.length
+    const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE)
+    const currentPage = Math.max(1, Math.min(page, totalPages))
+
+    const startIndex = (currentPage - 1) * POSTS_PER_PAGE
+    const endIndex = startIndex + POSTS_PER_PAGE
+    const posts = allPosts.slice(startIndex, endIndex)
+
+    return {
+      posts,
+      totalPages,
+      currentPage,
+      totalPosts
+    }
+  } catch (error) {
+    console.error('Error getting paginated posts:', error)
+    return {
+      posts: [],
+      totalPages: 0,
+      currentPage: 1,
+      totalPosts: 0
+    }
   }
 }
 
@@ -54,19 +93,27 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 }
 
 // 创建新文章
-export async function createPost(post: Omit<Post, 'slug'>): Promise<string> {
+export async function createPost(post: Omit<Post, 'slug' | 'createdAt' | 'updatedAt'>): Promise<string> {
   try {
-    // 生成 slug
-    const slug = post.title
+    // 生成 slug - 先尝试从标题生成
+    let slug = post.title
       .toLowerCase()
       .replace(/\s+/g, '-')
       .replace(/[^\w\-]+/g, '')
       .replace(/\-\-+/g, '-')
       .trim()
 
+    // 如果 slug 为空（比如纯中文标题），使用时间戳
+    if (!slug) {
+      slug = `post-${Date.now()}`
+    }
+
+    const now = new Date().toISOString()
     const fullPost: Post = {
       ...post,
       slug,
+      createdAt: now,
+      updatedAt: now,
     }
 
     // 保存文章
@@ -83,11 +130,16 @@ export async function createPost(post: Omit<Post, 'slug'>): Promise<string> {
 }
 
 // 更新文章
-export async function updatePost(slug: string, post: Omit<Post, 'slug'>): Promise<void> {
+export async function updatePost(slug: string, post: Omit<Post, 'slug' | 'createdAt' | 'updatedAt'>): Promise<void> {
   try {
+    // 获取原文章以保留 createdAt
+    const existingPost = await getPostBySlug(slug)
+
     const fullPost: Post = {
       ...post,
       slug,
+      createdAt: existingPost?.createdAt || new Date().toISOString(), // 保留原创建时间
+      updatedAt: new Date().toISOString(), // 更新编辑时间
     }
 
     await redis.set(`post:${slug}`, fullPost)

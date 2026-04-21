@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getPostBySlug, updatePost } from '@/lib/redis-posts'
+import { getPostBySlug, updatePost, deletePost } from '@/lib/redis-posts'
 
 export async function GET(
   request: Request,
@@ -45,6 +45,23 @@ export async function PUT(
     console.error('Error updating post:', error)
     return NextResponse.json(
       { error: 'Failed to update post' },
+      { status: 500 }
+    )
+  }
+}
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  try {
+    const { slug } = await params
+    await deletePost(slug)
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error('Error deleting post:', error)
+    return NextResponse.json(
+      { error: 'Failed to delete post' },
       { status: 500 }
     )
   }

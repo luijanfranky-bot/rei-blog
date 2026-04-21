@@ -32,16 +32,40 @@ export default function AdminLogin() {
       <div style={{
         backgroundColor: 'rgb(227, 218, 204)',
         padding: '3rem',
-        borderRadius: '12px',
+        borderRadius: '4px',
         width: '100%',
         maxWidth: '400px',
-        boxShadow: '0 4px 12px rgba(45, 45, 45, 0.08)'
+        border: '2px solid rgba(45, 45, 45, 0.1)',
+        boxShadow: '0 2px 8px rgba(45, 45, 45, 0.06)'
       }}>
-        <h1 style={{
-          fontSize: '2rem',
+        {/* 像素装饰 - 顶部 */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
           marginBottom: '2rem',
+          justifyContent: 'center'
+        }}>
+          <div style={{
+            width: '40px',
+            height: '2px',
+            background: 'linear-gradient(to right, transparent, #d97757)'
+          }} />
+          <span style={{ color: '#d97757', fontSize: '1.2rem' }}>▸</span>
+          <div style={{
+            width: '40px',
+            height: '2px',
+            background: 'linear-gradient(to left, transparent, #d97757)'
+          }} />
+        </div>
+
+        <h1 style={{
+          fontSize: 'clamp(1.25rem, 1.5vw, 1.5rem)',
+          marginBottom: '2.5rem',
           textAlign: 'center',
-          fontFamily: "'Press Start 2P', monospace"
+          fontFamily: "'Ark Pixel', monospace",
+          letterSpacing: '0.05em',
+          lineHeight: 1.6
         }}>
           管理后台登录
         </h1>
@@ -51,7 +75,8 @@ export default function AdminLogin() {
             <label style={{
               display: 'block',
               marginBottom: '0.5rem',
-              fontSize: '1rem',
+              fontSize: '0.875rem',
+              fontFamily: "'Ark Pixel', monospace",
               color: '#2d2d2d'
             }}>
               密码
@@ -62,11 +87,14 @@ export default function AdminLogin() {
               onChange={(e) => setPassword(e.target.value)}
               style={{
                 width: '100%',
-                padding: '0.75rem',
+                padding: '0.75rem 1rem',
                 fontSize: '1rem',
-                border: '1px solid rgb(217, 208, 194)',
-                borderRadius: '6px',
-                backgroundColor: 'rgb(240, 238, 230)'
+                border: '2px solid rgba(45, 45, 45, 0.15)',
+                borderRadius: '4px',
+                backgroundColor: 'rgb(240, 238, 230)',
+                outline: 'none',
+                transition: 'border-color 0.2s',
+                fontFamily: "'Courier New', monospace"
               }}
               placeholder="请输入密码"
             />
@@ -74,12 +102,13 @@ export default function AdminLogin() {
 
           {error && (
             <div style={{
-              padding: '0.75rem',
-              marginBottom: '1rem',
+              padding: '0.75rem 1rem',
+              marginBottom: '1.5rem',
               backgroundColor: 'rgba(217, 119, 87, 0.1)',
               color: '#d97757',
-              borderRadius: '6px',
-              fontSize: '0.875rem'
+              borderLeft: '3px solid #d97757',
+              fontSize: '0.875rem',
+              fontFamily: "'Ark Pixel', monospace"
             }}>
               {error}
             </div>
@@ -87,17 +116,10 @@ export default function AdminLogin() {
 
           <button
             type="submit"
+            className="pixel-btn pixel-btn-primary"
             style={{
               width: '100%',
-              padding: '0.75rem',
-              backgroundColor: '#d97757',
-              color: '#faf8f5',
-              border: 'none',
-              borderRadius: '6px',
-              fontSize: '1rem',
-              fontWeight: 600,
-              cursor: 'pointer',
-              transition: 'all 0.2s ease'
+              justifyContent: 'center'
             }}
           >
             登录
@@ -105,10 +127,13 @@ export default function AdminLogin() {
         </form>
 
         <p style={{
-          marginTop: '1.5rem',
+          marginTop: '2rem',
           textAlign: 'center',
-          fontSize: '0.875rem',
-          color: '#5a5a5a'
+          fontSize: '0.8rem',
+          color: '#8a8a8a',
+          fontFamily: "'Ark Pixel', monospace",
+          paddingTop: '1.5rem',
+          borderTop: '1px solid rgba(45, 45, 45, 0.08)'
         }}>
           默认密码：admin123
         </p>

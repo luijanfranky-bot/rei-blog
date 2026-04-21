@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import ImageDropzone from '@/components/ImageDropzone'
 
 export default function EditPost({ params }: { params: Promise<{ slug: string }> }) {
   const [slug, setSlug] = useState<string>('')
@@ -91,7 +92,13 @@ export default function EditPost({ params }: { params: Promise<{ slug: string }>
         justifyContent: 'center',
         backgroundColor: 'rgb(240, 238, 230)'
       }}>
-        <p style={{ fontSize: '1.5rem', color: '#5a5a5a' }}>加载中...</p>
+        <p style={{
+          fontSize: '1.5rem',
+          color: '#5a5a5a',
+          fontFamily: "'Ark Pixel', monospace"
+        }}>
+          加载中...
+        </p>
       </div>
     )
   }
@@ -108,23 +115,20 @@ export default function EditPost({ params }: { params: Promise<{ slug: string }>
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          marginBottom: '2rem'
+          marginBottom: '3rem'
         }}>
           <h1 style={{
-            fontSize: '2rem',
-            fontFamily: "'Press Start 2P', monospace"
+            fontSize: 'clamp(1.5rem, 2vw, 2rem)',
+            fontFamily: "'Ark Pixel', monospace",
+            letterSpacing: '0.05em'
           }}>
             编辑文章
           </h1>
           <div style={{ display: 'flex', gap: '1rem' }}>
             <Link
               href="/admin/posts"
+              className="pixel-btn pixel-btn-secondary"
               style={{
-                padding: '0.75rem 1.5rem',
-                backgroundColor: 'transparent',
-                color: '#2d2d2d',
-                border: '1px solid rgba(45, 45, 45, 0.1)',
-                borderRadius: '6px',
                 textDecoration: 'none'
               }}
             >
@@ -133,14 +137,10 @@ export default function EditPost({ params }: { params: Promise<{ slug: string }>
             <button
               onClick={handleSave}
               disabled={saving}
+              className="pixel-btn pixel-btn-primary"
               style={{
-                padding: '0.75rem 1.5rem',
-                backgroundColor: '#d97757',
-                color: '#faf8f5',
-                border: 'none',
-                borderRadius: '6px',
-                cursor: saving ? 'not-allowed' : 'pointer',
-                opacity: saving ? 0.6 : 1
+                opacity: saving ? 0.6 : 1,
+                cursor: saving ? 'not-allowed' : 'pointer'
               }}
             >
               {saving ? '保存中...' : '保存修改'}
@@ -157,11 +157,19 @@ export default function EditPost({ params }: { params: Promise<{ slug: string }>
           {/* 左侧：输入区 */}
           <div style={{
             backgroundColor: 'rgb(227, 218, 204)',
-            borderRadius: '12px',
+            borderRadius: '4px',
             padding: '2rem',
-            boxShadow: '0 1px 3px rgba(45, 45, 45, 0.04)'
+            border: '2px solid rgba(45, 45, 45, 0.1)',
+            boxShadow: '0 2px 8px rgba(45, 45, 45, 0.06)'
           }}>
-            <h2 style={{ fontSize: '1.25rem', marginBottom: '1.5rem' }}>文章信息</h2>
+            <h2 style={{
+              fontSize: '1.125rem',
+              marginBottom: '1.5rem',
+              fontFamily: "'Ark Pixel', monospace",
+              letterSpacing: '0.05em'
+            }}>
+              文章信息
+            </h2>
 
             {/* 标题 */}
             <div style={{ marginBottom: '1.5rem' }}>
@@ -247,28 +255,9 @@ export default function EditPost({ params }: { params: Promise<{ slug: string }>
 
             {/* 封面图 */}
             <div style={{ marginBottom: '1.5rem' }}>
-              <label style={{
-                display: 'block',
-                marginBottom: '0.5rem',
-                fontSize: '0.875rem',
-                fontWeight: 600,
-                color: '#2d2d2d'
-              }}>
-                封面图 URL（可选）
-              </label>
-              <input
-                type="text"
-                value={cover}
-                onChange={(e) => setCover(e.target.value)}
-                placeholder="https://example.com/image.jpg"
-                style={{
-                  width: '100%',
-                  padding: '0.75rem',
-                  fontSize: '1rem',
-                  border: '1px solid rgb(217, 208, 194)',
-                  borderRadius: '6px',
-                  backgroundColor: 'rgb(240, 238, 230)'
-                }}
+              <ImageDropzone
+                onImageUpload={(url) => setCover(url)}
+                currentImage={cover}
               />
             </div>
 
@@ -305,13 +294,21 @@ export default function EditPost({ params }: { params: Promise<{ slug: string }>
           {/* 右侧：预览区 */}
           <div style={{
             backgroundColor: 'rgb(227, 218, 204)',
-            borderRadius: '12px',
+            borderRadius: '4px',
             padding: '2rem',
-            boxShadow: '0 1px 3px rgba(45, 45, 45, 0.04)',
+            border: '2px solid rgba(45, 45, 45, 0.1)',
+            boxShadow: '0 2px 8px rgba(45, 45, 45, 0.06)',
             maxHeight: '80vh',
             overflow: 'auto'
           }}>
-            <h2 style={{ fontSize: '1.25rem', marginBottom: '1.5rem' }}>预览</h2>
+            <h2 style={{
+              fontSize: '1.125rem',
+              marginBottom: '1.5rem',
+              fontFamily: "'Ark Pixel', monospace",
+              letterSpacing: '0.05em'
+            }}>
+              预览
+            </h2>
 
             {title && (
               <h1 style={{

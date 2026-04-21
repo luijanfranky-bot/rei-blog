@@ -1,7 +1,9 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Navigation from '@/components/Navigation'
+import BackToTop from '@/components/BackToTop'
 import { getPostBySlug, markdownToHtml } from '@/lib/redis-posts'
+import 'highlight.js/styles/atom-one-light.css'
 
 // 强制动态渲染
 export const dynamic = 'force-dynamic'
@@ -29,16 +31,16 @@ export default async function PostPage({ params }: Props) {
           <div className="container" style={{ maxWidth: '800px' }}>
             {/* 文章头部 */}
             <header style={{ marginBottom: '3rem' }}>
-              {/* 返回链接 */}
+              {/* 返回按钮 */}
               <Link
                 href="/#articles"
+                className="pixel-btn pixel-btn-primary"
                 style={{
                   display: 'inline-block',
                   marginBottom: '2rem',
-                  color: '#5a5a5a',
-                  textDecoration: 'none',
-                  borderBottom: '3px solid currentColor',
-                  paddingBottom: '2px'
+                  padding: '0.75rem 2rem',
+                  fontSize: '12px',
+                  textDecoration: 'none'
                 }}
               >
                 ← 返回首页
@@ -52,14 +54,15 @@ export default async function PostPage({ params }: Props) {
                     style={{
                       display: 'inline-flex',
                       alignItems: 'center',
-                      padding: '6px 12px',
-                      fontSize: '0.875rem',
+                      padding: '4px 10px',
+                      fontSize: '13px',
+                      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif',
                       fontWeight: 500,
-                      lineHeight: 1,
-                      borderRadius: '6px',
-                      backgroundColor: 'rgba(217, 119, 87, 0.1)',
+                      lineHeight: 1.2,
+                      borderRadius: '3px',
+                      backgroundColor: 'rgba(217, 119, 87, 0.12)',
                       color: '#d97757',
-                      border: 'none'
+                      border: '1px solid rgba(217, 119, 87, 0.3)'
                     }}
                   >
                     {tag}
@@ -67,11 +70,27 @@ export default async function PostPage({ params }: Props) {
                 ))}
               </div>
 
+              {/* 像素装饰 - 标题上方 */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                marginBottom: '1rem'
+              }}>
+                <span style={{ color: '#d97757', fontSize: '1.5rem' }}>▸</span>
+                <div style={{
+                  flex: 1,
+                  height: '2px',
+                  background: 'linear-gradient(to right, #d97757, transparent)'
+                }} />
+              </div>
+
               {/* 标题 */}
               <h1 style={{
                 fontSize: 'clamp(2rem, 3vw, 3rem)',
                 marginBottom: '1rem',
-                lineHeight: 1.2
+                lineHeight: 1.2,
+                fontFamily: "'Ark Pixel', monospace"
               }}>
                 {post.title}
               </h1>
@@ -81,12 +100,11 @@ export default async function PostPage({ params }: Props) {
                 display: 'flex',
                 gap: '1rem',
                 color: '#5a5a5a',
-                fontSize: '1rem',
-                marginBottom: '2rem'
+                fontSize: '14px',
+                marginBottom: '2rem',
+                fontFamily: "'Ark Pixel', monospace"
               }}>
                 <span>{post.date}</span>
-                <span>·</span>
-                <span>{post.readTime}</span>
                 <span>·</span>
                 <span>作者：Rei</span>
               </div>
@@ -104,7 +122,8 @@ export default async function PostPage({ params }: Props) {
               className="article-content"
               style={{
                 lineHeight: 1.8,
-                color: '#2d2d2d'
+                color: '#2d2d2d',
+                fontSize: '1.125rem'
               }}
               dangerouslySetInnerHTML={{ __html: content }}
             />
@@ -113,46 +132,40 @@ export default async function PostPage({ params }: Props) {
             <footer style={{
               marginTop: '4rem',
               paddingTop: '2rem',
-              borderTop: '1px solid rgb(227, 218, 204)'
+              borderTop: '3px solid #d97757'
             }}>
+              {/* 像素装饰 - 底部 */}
               <div style={{
                 display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center'
+                alignItems: 'center',
+                gap: '0.5rem',
+                marginBottom: '2rem'
               }}>
-                <Link
-                  href="/#articles"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '0.75rem 2rem',
-                    backgroundColor: 'transparent',
-                    color: '#2d2d2d',
-                    border: '1px solid rgba(45, 45, 45, 0.1)',
-                    borderRadius: '4px',
-                    textDecoration: 'none',
-                    transition: 'all 0.15s ease',
-                    fontFamily: "'Press Start 2P', monospace",
-                    fontSize: '12px'
-                  }}
-                >
-                  返回首页
-                </Link>
-                <div style={{ display: 'flex', gap: '1rem' }}>
-                  <span style={{
-                    color: '#5a5a5a',
-                    fontSize: '1rem'
-                  }}>
-                    分享到：
-                  </span>
-                  <a href="#" style={{ color: '#d97757' }}>Twitter</a>
-                  <a href="#" style={{ color: '#d97757' }}>微博</a>
-                </div>
+                <div style={{
+                  flex: 1,
+                  height: '2px',
+                  background: 'linear-gradient(to right, transparent, #d97757)'
+                }} />
+                <span style={{ color: '#d97757', fontSize: '1.5rem' }}>◂</span>
               </div>
+
+              <Link
+                href="/#articles"
+                className="pixel-btn pixel-btn-primary"
+                style={{
+                  padding: '0.75rem 2rem',
+                  fontSize: '12px',
+                  textDecoration: 'none'
+                }}
+              >
+                ← 返回首页
+              </Link>
             </footer>
           </div>
         </article>
+
+        {/* 返回顶部按钮 */}
+        <BackToTop />
       </main>
     </>
   )

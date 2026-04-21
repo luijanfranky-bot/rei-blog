@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import Image from 'next/image'
 
 export default function Navigation() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -41,7 +40,8 @@ export default function Navigation() {
       zIndex: 300,
       backgroundColor: 'rgb(240, 238, 230)',
       height: '4.25rem',
-      paddingTop: '1rem'
+      borderBottom: '4px solid #b85d42',
+      boxShadow: '0 4px 0 rgba(45, 45, 45, 0.12), inset 0 -2px 0 rgba(255, 255, 255, 0.18)'
     }}>
       <div className="container" style={{
         display: 'flex',
@@ -49,24 +49,14 @@ export default function Navigation() {
         justifyContent: 'space-between',
         height: '100%',
         padding: '0 clamp(2rem, 1.08vw + 3.92vw, 5rem)',
-        border: '3px solid #d97757',
         backgroundColor: 'rgb(240, 238, 230)'
       }}>
         {/* Logo 区域 */}
         <Link href="/" style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '12px',
           textDecoration: 'none'
         }}>
-          <Image
-            src="/logo-avatar.png"
-            alt="Rei"
-            width={40}
-            height={40}
-            className="pixel-art"
-            style={{ borderRadius: '2px' }}
-          />
           <span style={{
             fontFamily: "'Press Start 2P', monospace",
             fontSize: '16px',
@@ -74,7 +64,7 @@ export default function Navigation() {
             textTransform: 'uppercase',
             color: '#2d2d2d'
           }}>
-            Rei&apos;s World
+            EVANGELIAN - 01
           </span>
         </Link>
 
@@ -90,7 +80,7 @@ export default function Navigation() {
           <li>
             <Link href="/" style={{
               fontFamily: "'Press Start 2P', monospace",
-              fontSize: '14px',
+              fontSize: '16px',
               fontWeight: 700,
               letterSpacing: '0.1em',
               color: '#d97757',
@@ -103,7 +93,7 @@ export default function Navigation() {
           <li>
             <Link href="#" style={{
               fontFamily: "'Press Start 2P', monospace",
-              fontSize: '14px',
+              fontSize: '16px',
               fontWeight: 700,
               letterSpacing: '0.1em',
               color: '#5a5a5a',
@@ -116,7 +106,7 @@ export default function Navigation() {
           <li>
             <Link href="#" style={{
               fontFamily: "'Press Start 2P', monospace",
-              fontSize: '14px',
+              fontSize: '16px',
               fontWeight: 700,
               letterSpacing: '0.1em',
               color: '#5a5a5a',
@@ -129,7 +119,7 @@ export default function Navigation() {
           <li>
             <Link href="#" style={{
               fontFamily: "'Press Start 2P', monospace",
-              fontSize: '14px',
+              fontSize: '16px',
               fontWeight: 700,
               letterSpacing: '0.1em',
               color: '#5a5a5a',
@@ -143,7 +133,7 @@ export default function Navigation() {
             <li>
               <Link href="/admin/posts" style={{
                 fontFamily: "'Press Start 2P', monospace",
-                fontSize: '14px',
+                fontSize: '16px',
                 fontWeight: 700,
                 letterSpacing: '0.1em',
                 color: '#d97757',
@@ -160,7 +150,7 @@ export default function Navigation() {
                 onClick={handleLogout}
                 style={{
                   fontFamily: "'Press Start 2P', monospace",
-                  fontSize: '14px',
+                  fontSize: '16px',
                   fontWeight: 700,
                   letterSpacing: '0.1em',
                   color: '#d97757',
@@ -178,7 +168,7 @@ export default function Navigation() {
             ) : (
               <Link href="/admin/login" style={{
                 fontFamily: "'Press Start 2P', monospace",
-                fontSize: '14px',
+                fontSize: '16px',
                 fontWeight: 700,
                 letterSpacing: '0.1em',
                 color: '#d97757',
