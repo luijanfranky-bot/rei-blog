@@ -387,14 +387,14 @@ export default async function Home({
             marginBottom: '2rem'
           }}>
             <div>
-              <h3 style={{ fontSize: '1.125rem', marginBottom: '1rem' }}>关于</h3>
+              <h3 style={{ fontSize: '1.125rem', marginBottom: '1rem', fontFamily: "'Ark Pixel', monospace" }}>关于</h3>
               <p className="text--small" style={{ color: '#5a5a5a' }}>
                 一个专注于技术与设计的个人博客，分享编程经验和生活感悟。
               </p>
             </div>
 
             <div>
-              <h3 style={{ fontSize: '1.125rem', marginBottom: '1rem' }}>快速链接</h3>
+              <h3 style={{ fontSize: '1.125rem', marginBottom: '1rem', fontFamily: "'Ark Pixel', monospace" }}>快速链接</h3>
               <ul style={{ listStyle: 'none', padding: 0 }}>
                 <li style={{ marginBottom: '0.5rem' }}>
                   <Link href="/" style={{ color: '#5a5a5a', textDecoration: 'none' }}>首页</Link>
@@ -412,7 +412,7 @@ export default async function Home({
             </div>
 
             <div>
-              <h3 style={{ fontSize: '1.125rem', marginBottom: '1rem' }}>联系方式</h3>
+              <h3 style={{ fontSize: '1.125rem', marginBottom: '1rem', fontFamily: "'Ark Pixel', monospace" }}>联系方式</h3>
               <ul style={{ listStyle: 'none', padding: 0 }}>
                 <li style={{ marginBottom: '0.5rem' }}>
                   <a href="#" style={{ color: '#5a5a5a', textDecoration: 'none' }}>GitHub</a>
