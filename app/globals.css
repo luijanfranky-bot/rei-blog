@@ -193,6 +193,7 @@ img.pixel-art {
   margin: 2rem 0;
   border: 2px solid #d97757;
   box-shadow: 4px 4px 0 rgba(217, 119, 87, 0.2);
+  color: #f8f8f2;
 }
 
 .article-content code {
@@ -208,7 +209,7 @@ img.pixel-art {
 .article-content pre code {
   background-color: transparent;
   padding: 0;
-  color: inherit;
+  color: #f8f8f2;
 }
 
 .article-content blockquote {
